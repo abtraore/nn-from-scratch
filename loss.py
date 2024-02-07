@@ -28,5 +28,5 @@ class CCE(Loss):
         elif len(y_true.shape) == 2:
             correct_confidences = np.sum(y_pred * y_true, axis=1)
 
-        # Return negative log-likelihoods.
+        # Return negative log-likelihoods
         return -np.log(correct_confidences)
