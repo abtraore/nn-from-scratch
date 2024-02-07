@@ -2,7 +2,6 @@ import numpy as np
 
 
 class Loss:
-
     def calculate(self, output, y):
 
         sample_losses = self.forward(output, y)
@@ -13,13 +12,17 @@ class Loss:
 
 
 class CCE(Loss):
+    def __init__(self) -> None:
+        super().__init__()
+
+        self.epsilon = 1e-7
 
     def forward(self, y_pred, y_true):
 
         samples = len(y_pred)
 
         # Avoid division by 0 and mean dragging towards any direction.
-        y_pred_clipped = np.clip(y_pred, 1e-7, 1 - 1e-7)
+        y_pred_clipped = np.clip(y_pred, self.epsilon, 1 - self.epsilon)
 
         # Not one-hot encoded.
         if len(y_true.shape) == 1:
@@ -28,5 +31,5 @@ class CCE(Loss):
         elif len(y_true.shape) == 2:
             correct_confidences = np.sum(y_pred * y_true, axis=1)
 
-        # Return negative log-likelihoods
+        # Return negative log-likelihoods.
         return -np.log(correct_confidences)
