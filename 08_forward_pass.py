@@ -10,4 +10,5 @@ X, y = spiral_data(samples=100, classes=3)
 
 l1 = Linear(2, 3)
 l1.forward(X)
-print()
+
+print(l1.output.shape)

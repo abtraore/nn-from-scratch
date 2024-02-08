@@ -7,6 +7,8 @@ class Linear:
         self.weights = np.random.randn(n_inputs, n_neurons)
         self.bias = np.zeros((1, n_neurons))
 
+        print(self.weights)
+
     def forward(self, inputs):
 
         # Column of the weight matrix match the number of features in input (row)
