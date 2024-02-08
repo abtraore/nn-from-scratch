@@ -14,6 +14,14 @@ class Linear:
         # Column of the weight matrix match the number of features in input (row)
         self.output = np.dot(inputs, self.weights) + self.bias
 
+    def backward(self, dvalues):
+
+        # Gradients parameters.
+        self.dweights = np.dot(self.inputs.T, dvalues)
+        self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
+        # Gradient value.
+        self.dinputs = np.sum(dvalues, axis=0, keepdims=True)
+
 
 # Unit 9: activation_function_relu.py
 class Relu:
