@@ -33,3 +33,19 @@ class CCE(Loss):
 
         # Return negative log-likelihoods.
         return -np.log(correct_confidences)
+
+    def backward(self, dvalues, y_true):
+
+        # Batch count.
+        samples = len(dvalues)
+
+        # Number class.
+        labels = len(dvalues[0])
+        # If labels are sparse, turn them into one-hot vector
+        if len(y_true.shape) == 1:
+            y_true = np.eye(labels)[y_true]
+
+        # Calculate gradient
+        self.dinputs = -y_true / dvalues
+        # Normalize gradient, to make it invariant to the number of sample.
+        self.dinputs = self.dinputs / samples
