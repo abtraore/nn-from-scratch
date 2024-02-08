@@ -11,7 +11,7 @@ class Linear:
         print(self.weights)
 
     def forward(self, inputs):
-
+        self.inputs = inputs
         # Column of the weight matrix match the number of features in input (row)
         self.output = np.dot(inputs, self.weights) + self.bias
 
@@ -21,7 +21,7 @@ class Linear:
         self.dweights = np.dot(self.inputs.T, dvalues)
         self.dbiases = np.sum(dvalues, axis=0, keepdims=True)
         # Gradient value.
-        self.dinputs = np.sum(dvalues, axis=0, keepdims=True)
+        self.dinputs = np.dot(dvalues, self.weights.T)
 
 
 # Unit 9: activation_function_relu.py
