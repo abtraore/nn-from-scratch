@@ -26,7 +26,15 @@ class Linear:
 # Unit 9: activation_function_relu.py
 class Relu:
     def forward(self, inputs):
+        self.inputs = inputs
         self.output = np.maximum(0, inputs)
+
+    def backward(self, dvalues):
+        # Make a copy to not modify the targeted variable.
+        self.dinputs = dvalues.copy()
+
+        # Zero where the gradiant is negative.
+        self.dinputs[self.inputs <= 0] = 0
 
 
 # Unit 10: activation_function_softmax.py
