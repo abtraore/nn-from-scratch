@@ -16,7 +16,7 @@ relu1 = Relu()
 
 loss_fn = SoftmaxCCE()
 
-optim = SGD()
+optim = SGD(learning_rate=1)
 
 for epoch in range(10001):
 
